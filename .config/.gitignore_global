@@ -1,0 +1,19 @@
+# NodeJs
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# macOS
+.DS_Store
+
+# JetBrains
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# Vim
+*.swp
+
+# Rust
+target/
