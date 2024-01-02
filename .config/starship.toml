@@ -1,79 +1,82 @@
 # ~/.config/starship.toml
 
-add_newline = false
+add_newline     = true
 command_timeout = 1000
-format = """$os$username$hostname$kubernetes$directory$git_branch$git_status"""
+#format          = """$os$username$hostname$kubernetes$directory$git_branch$git_status"""
+format = """\
+[╭╴](238)$os$username$kubernetes$directory$git_branch$git_status\n[╰→](238)$character"""
+
 
 # Drop ugly default prompt characters
 [character]
+error_symbol   = ''
 success_symbol = ''
-error_symbol = ''
 
 # ---
 
 [os]
-format = '[$symbol](bold white) '   
 disabled = false
+format   = '[$symbol](bold white) '
 
 [os.symbols]
+Arch    = '󰣇'
+Macos   = '󰀵'
+Ubuntu  = ''
 Windows = ' '
-Arch = '󰣇'
-Ubuntu = ''
-Macos = '󰀵'
 
 # ---y
 
 # Shows the username
 [username]
-style_user = 'white bold'
-style_root = 'black bold'
-format = '[$user]($style) '
-disabled = false
+disabled    = false
+format      = '[$user]($style) '
 show_always = true
+style_root  = 'black bold'
+style_user  = 'white bold'
 
 # Shows the hostname
 [hostname]
-ssh_only = false
-format = 'on [$hostname](bold yellow) '
 disabled = false
+format   = 'on [$hostname](bold yellow) '
+ssh_only = false
 
 # Shows current directory
 [directory]
+format            = 'at [$path]($style)[$read_only]($read_only_style) '
+home_symbol       = '󰋜 ~'
+read_only         = '  '
+read_only_style   = '197'
 truncation_length = 1
 truncation_symbol = '…/'
-home_symbol = '󰋜 ~'
-read_only_style = '197'
-read_only = '  '
-format = 'at [$path]($style)[$read_only]($read_only_style) '
 
 # Shows current git branch
 [git_branch]
-symbol = ' '
 format = 'via [$symbol$branch]($style)'
+symbol = ' '
 # truncation_length = 4
+style             = 'bold green'
 truncation_symbol = '…/'
-style = 'bold green'
 
 # Shows current git status
 [git_status]
-format = '[$all_status$ahead_behind]($style) '
-style = 'bold green'
+ahead      = '⇡${count}'
+behind     = '⇣${count}'
 conflicted = '🏳'
+deleted    = ' '
+diverged   = '⇕⇡${ahead_count}⇣${behind_count}'
+format     = '[$all_status$ahead_behind]($style) '
+modified   = ' '
+renamed    = '襁 '
+staged     = '[++\($count\)](green)'
+stashed    = ' '
+style      = 'bold green'
+untracked  = ' '
 up_to_date = ''
-untracked = ' '
-ahead = '⇡${count}'
-diverged = '⇕⇡${ahead_count}⇣${behind_count}'
-behind = '⇣${count}'
-stashed = ' '
-modified = ' '
-staged = '[++\($count\)](green)'
-renamed = '襁 '
-deleted = ' '
 
 # Shows kubernetes context and namespace
 [kubernetes]
-format = 'via [󱃾 $context\($namespace\)](bold purple) '
 disabled = false
+format   = 'via [󱃾 $context\($namespace\)](bold purple) '
 
 # ---
 
