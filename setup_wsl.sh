@@ -18,9 +18,9 @@ ZSH_ENV_DEST="$HOME/.zshenv"
 
 # Config directories
 CONFIG_FOLDER_SRC=".config"
-CONFIG_FOLDER_DEST="$HOME/.config"
+CONFIG_FOLDER_DEST="$HOME/"
 ZSH_FOLDER_SRC=".zsh"
-ZSH_FOLDER_DEST="$HOME/.zsh"
+ZSH_FOLDER_DEST="$HOME/"
 
 copy_file() {
   local src="$1"
