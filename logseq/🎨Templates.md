@@ -1,0 +1,33 @@
+- #🤝Meetings
+  template:: Meeting
+	- Date: <%today%>
+	- Time: <%time%>
+	- Location:
+	- Type: [[Team]], [[1:1]], [[Adhoc]], [[Standup]]
+	- Attendees:
+	-
+	- Main Topic:
+	-
+	- Notes:
+	-
+	- [[🧞Actionable Items]]
+		- LATER Item1
+-
+- #🧔People
+  template:: People
+	- Title:
+	- Location:
+-
+- #📝Agenda for <%today%>
+  template:: Agenda
+	- Scheduled Meetings:
+		- TODO Item1 @0000
+		-
+	- [[⛏️Tasks]]
+		- TODO Item 1
+	-
+	- [[🚀Actual]]
+		- Item 1
+	-
+	- [[Germanium Summary]]
+		- Item 1
