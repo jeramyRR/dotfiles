@@ -75,6 +75,11 @@ install_asdf() {
 }
 
 install_rust() {
+  echo "Installing required packages"
+  sudo apt update
+  sudo apt upgrade -y
+  sudo apt install build-essential checkinstall zlib1g-dev -y
+  
   echo "Installing rustup"
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh  
 }
@@ -109,14 +114,28 @@ install_ohmyzsh() {
   fi
 }
 
+install_cargo_package() {
+  local package="$1"
+  
+  cargo install $package
+  if [[ $? -ne 0 ]]; then
+    echo "Failed to install package"
+    exit 1
+  fi
+
+}
+
 main() {
   echo "Working out of script directory $SCRIPT_DIR"
 
   install_asdf
-  install_direnv
+  # We may not need to install direnv because asdf comes with one
+  # install_direnv
   install_rust
   install_starship
   install_ohmyzsh
+  install_cargo_package "exa"
+  install_cargo_package "ripgrep"
 
   copy_file "$BASH_RC_SRC" "$BASH_RC_DEST"
   copy_file "$GIT_CONFIG_SRC" "$GIT_CONFIG_DEST"

@@ -10,14 +10,16 @@ HISTSIZE=1000
 SAVEHIST=1000
 setopt appendhistory
 
+# Load asdf
+. "$HOME/.asdf/asdf.sh"
+
 # Load Starship
 eval "$(starship init zsh)"
 
 # Load Direnv
 eval "$(direnv hook zsh)"
 
-# Load asdf
-. "$HOME/.asdf/asdf.sh"
+
 
 # append completions to fpath
 fpath=(${ASDF_DIR}/completions $fpath)
