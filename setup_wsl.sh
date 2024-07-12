@@ -5,7 +5,7 @@ set -o errexit
 set -o pipefail
 
 if [[ "${TRACE-0}" == "1" ]]; then
-    set -o xtrace
+  set -o xtrace
 fi
 
 SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
@@ -37,11 +37,11 @@ ZSH_FOLDER_DEST="$HOME/"
 copy_file() {
   local src="$1"
   local dest="$2"
-  
+
   if [[ -f "$src" ]]; then
     echo "Copying $src to $dest"
     cp -f "$src" "$dest"
-   
+
     if [[ $? -ne 0 ]]; then
       echo "Failed to copy $src to $dest"
       exit 1
@@ -50,12 +50,12 @@ copy_file() {
 
 }
 
-copy_dir() { 
+copy_dir() {
   local src="$1"
   local dest="$2"
 
   if [[ -d "$src" ]]; then
-  echo "Copying $src folder to $dest"
+    echo "Copying $src folder to $dest"
     cp -rf $src $dest
     if [[ $? -ne 0 ]]; then
       echo "Failed to copy $src folder to $dest"
@@ -78,10 +78,10 @@ install_rust() {
   echo "Installing required packages"
   sudo apt update
   sudo apt upgrade -y
-  sudo apt install build-essential checkinstall zlib1g-dev -y
-  
+  sudo apt install build-essential checkinstall zlib1g-dev pkg-config -y
+
   echo "Installing rustup"
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh  
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 }
 
 install_starship() {
@@ -92,7 +92,7 @@ install_starship() {
 
   echo "Installing Starship.rs"
   curl -sS https://starship.rs/install.sh | sh
-    
+
   if [[ $? -ne 0 ]]; then
     echo "Failed to install starship.rs"
     exit 1
@@ -116,7 +116,7 @@ install_ohmyzsh() {
 
 install_cargo_package() {
   local package="$1"
-  
+
   cargo install $package
   if [[ $? -ne 0 ]]; then
     echo "Failed to install package"
@@ -153,4 +153,3 @@ main() {
 }
 
 main "$@"
-
