@@ -1,20 +1,32 @@
 #! /usr/bin/env bash
 
+set -o nounset
+set -o errexit
+set -o pipefail
+
+if [[ "${TRACE-0}" == "1" ]]; then
+    set -o xtrace
+fi
+
 SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
 
 ## Individual config files
-BASH_RC_SRC=".bashrc"
-BASH_RC_DEST="$HOME/.bashrc"
-GIT_CONFIG_SRC=".gitconfig"
-GIT_CONFIG_DEST="$HOME/.gitconfig"
+BASH_RC_SRC="rc/.bashrc"
+BASH_RC_DEST="$HOME/"
+GIT_CONFIG_SRC=".config/.gitconfig"
+GIT_CONFIG_DEST="$HOME/"
 HUSHLOGIN_SRC=".hushlogin"
-HUSHLOGIN_DEST="$HOME/.hushlogin"
-INPUT_RC_SRC=".inputrc"
-INPUT_RC_DEST="$HOME/.inputrc"
-ZSH_RC_SRC=".zshrc"
-ZSH_RC_DEST="$HOME/.zshrc"
+HUSHLOGIN_DEST="$HOME/"
+INPUT_RC_SRC="rc/.inputrc"
+INPUT_RC_DEST="$HOME/"
+STARSHIP_RC_SRC=".config/.starship.rc"
+STARSHIP_RC_DEST="$HOME/"
+ZSH_RC_SRC="rc/.zshrc"
+ZSH_RC_DEST="$HOME/"
+ZSH_OHMY_RC_SRC="rc/"
+ZSH_OHMY_RC_DEST="$HOME/"
 ZSH_ENV_SRC=".zshenv"
-ZSH_ENV_DEST="$HOME/.zshenv"
+ZSH_ENV_DEST="$HOME/"
 
 # Config directories
 CONFIG_FOLDER_SRC=".config"
@@ -27,7 +39,9 @@ copy_file() {
   local dest="$2"
   
   if [[ -f "$src" ]]; then
+    echo "Copying $src to $dest"
     cp -f "$src" "$dest"
+   
     if [[ $? -ne 0 ]]; then
       echo "Failed to copy $src to $dest"
       exit 1
@@ -41,6 +55,7 @@ copy_dir() {
   local dest="$2"
 
   if [[ -d "$src" ]]; then
+  echo "Copying $src folder to $dest"
     cp -rf $src $dest
     if [[ $? -ne 0 ]]; then
       echo "Failed to copy $src folder to $dest"
@@ -49,58 +64,61 @@ copy_dir() {
   fi
 }
 
-copy_bash_rc() {
-  echo "Copying $BASH_RC_SRC to $BASH_RC_DEST"
-  copy_file "$BASH_RC_SRC" "$BASH_RC_DEST"
+install_rust() {
+  echo "Installing rustup"
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh  
 }
 
-copy_git_config() {
-  echo "Copying $GIT_CONFIG_SRC to $GIT_CONFIG_DEST"
-  copy_file "$GIT_CONFIG_SRC" "$GIT_CONFIG_DEST"
+install_starship() {
+  if [[ -f /usr/local/bin/starship ]]; then
+    echo "starship.rs already exists, skipping"
+    return
+  fi
+
+  echo "Installing Starship.rs"
+  curl -sS https://starship.rs/install.sh | sh
+    
+  if [[ $? -ne 0 ]]; then
+    echo "Failed to install starship.rs"
+    exit 1
+  fi
 }
 
-copy_hushlogin() {
-  echo "Copying $HUSHLOGIN_SRC to $HUSHLOGIN_DEST"
-  copy_file "$HUSHLOGIN_SRC" "$HUSHLOGIN_DEST"
-}
+install_ohmyzsh() {
+  if [[ ! -f /usr/bin/zsh ]]; then
+    echo "Installing zsh"
+    sudo apt install zsh -y
+  fi
 
-copy_input_rc() {
-  echo "Copying $INPUT_RC_SRC to $INPUT_RC_DEST"
-  copy_file "$INPUT_RC_SRC" "$INPUT_RC_DEST"
-}
+  echo "Installing oh-my-zsh"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-copy_zsh_rc() {
-  echo "Copying $ZSH_RC_SRC to $ZSH_RC_DEST"
-  copy_file "$ZSH_RC_SRC" "$ZSH_RC_DEST"
-}
-
-copy_zsh_env() {
-  echo "Copying $ZSH_ENV_SRC to $ZSH_ENV_DEST"
-  copy_file "$ZSH_ENV_SRC" "$ZSH_ENV_DEST"
-}
-
-copy_config_dir() {
-  echo "Copying $CONFIG_FOLDER_SRC folder to $CONFIG_FOLDER_DEST"
-  copy_dir "$CONFIG_FOLDER_SRC" "$CONFIG_FOLDER_DEST"
-}
-
-copy_zsh_dir() {
-  echo "Copying $ZSH_FOLDER_SRC folder to $ZSH_FOLDER_DEST"
-  copy_dir "$ZSH_FOLDER_SRC" "$ZSH_FOLDER_DEST"
+  if [[ $? -ne 0 ]]; then
+    echo "Failed to install oh-my-zsh"
+    exit 1
+  fi
 }
 
 main() {
   echo "Working out of script directory $SCRIPT_DIR"
 
-  copy_bash_rc
-  copy_git_config
-  copy_hushlogin
-  copy_input_rc
-  copy_zsh_rc
-  copy_zsh_env
+  install_rust
+  install_starship
+  install_ohmyzsh
 
-  copy_config_dir
-  copy_zsh_dir
+  copy_file "$BASH_RC_SRC" "$BASH_RC_DEST"
+  copy_file "$GIT_CONFIG_SRC" "$GIT_CONFIG_DEST"
+  copy_file "$HUSHLOGIN_SRC" "$HUSHLOGIN_DEST"
+  copy_file "$INPUT_RC_SRC" "$INPUT_RC_DEST"
+  copy_file "$STARSHIP_RC_SRC" "$STARSHIP_RC_DEST"
+  copy_file "$ZSH_RC_SRC" "$ZSH_RC_DEST"
+  copy_file "$ZSH_OHMY_RC_SRC" "$ZSH_OHMY_RC_DEST"
+  copy_file "$ZSH_ENV_SRC" "$ZSH_ENV_DEST"
+
+  copy_dir "$CONFIG_FOLDER_SRC" "$CONFIG_FOLDER_DEST"
+  copy_dir "$ZSH_FOLDER_SRC" "$ZSH_FOLDER_DEST"
+
+  echo "Setup complete.  Please close out your terminal and reopen."
 }
 
 main "$@"
