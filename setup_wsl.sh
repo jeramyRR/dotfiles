@@ -64,6 +64,11 @@ copy_dir() {
   fi
 }
 
+install_asdf() {
+  echo "Installing asdf"
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
+}
+
 install_rust() {
   echo "Installing rustup"
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh  
@@ -102,6 +107,7 @@ install_ohmyzsh() {
 main() {
   echo "Working out of script directory $SCRIPT_DIR"
 
+  install_asdf
   install_rust
   install_starship
   install_ohmyzsh
