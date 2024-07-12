@@ -64,6 +64,11 @@ copy_dir() {
   fi
 }
 
+install_direnv() {
+  echo "Installing direnv"
+  curl -sfL https://direnv.net/install.sh | bash
+}
+
 install_asdf() {
   echo "Installing asdf"
   git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
@@ -108,6 +113,7 @@ main() {
   echo "Working out of script directory $SCRIPT_DIR"
 
   install_asdf
+  install_direnv
   install_rust
   install_starship
   install_ohmyzsh
