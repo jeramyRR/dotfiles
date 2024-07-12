@@ -78,7 +78,7 @@ install_rust() {
   echo "Installing required packages"
   sudo apt update
   sudo apt upgrade -y
-  sudo apt install build-essential checkinstall zlib1g-dev pkg-config -y
+  sudo apt install build-essential checkinstall libssl-dev pkg-config -y
 
   echo "Installing rustup"
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
