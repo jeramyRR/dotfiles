@@ -1,0 +1,101 @@
+{
+  "editor.minimap.enabled": false,
+  "explorer.autoReveal": false,
+  "workbench.colorTheme": "freeCodeCamp Dark Theme",
+  "editor.tabSize": 2,
+  "editor.tabCompletion": "on",
+  "editor.rulers": [
+    120
+  ],
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": false
+  },
+  "telemetry.telemetryLevel": "off",
+  "workbench.sideBar.location": "left",
+  "explorer.confirmDragAndDrop": false,
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "editor.parameterHints.enabled": false,
+  "explorer.confirmDelete": false,
+  // Rust stuff
+  "git.ignoreMissingGitWarning": true,
+  "files.associations": {
+    "*.eex": "HTML (EEx)",
+    "*.leex": "HTML (EEx)",
+    "*.tmpl": "html"
+  },
+  "emmet.includeLanguages": {
+    "HTML (EEx)": "html"
+  },
+  "lldb.suppressUpdateNotifications": true,
+  "editor.matchBrackets": false,
+  "workbench.iconTheme": "field-lights",
+  "workbench.startupEditor": "none",
+  "dotnetAcquisitionExtension.enableTelemetry": false,
+  "syntax.debugHover": true,
+  "evenBetterToml.formatter.alignComments": true,
+  "evenBetterToml.formatter.alignEntries": true,
+  "evenBetterToml.formatter.allowedBlankLines": 1,
+  "evenBetterToml.formatter.arrayAutoCollapse": true,
+  "evenBetterToml.formatter.arrayAutoExpand": true,
+  "evenBetterToml.formatter.arrayTrailingComma": true,
+  "evenBetterToml.formatter.columnWidth": 100,
+  "evenBetterToml.formatter.reorderKeys": true,
+  "cSpell.userWords": [
+    "AUTOINCREMENT",
+    "chrono",
+    "clippy",
+    "cpus",
+    "endregion",
+    "Gruvbox",
+    "hediet",
+    "humansize",
+    "jeramy",
+    "leex",
+    "mixtral",
+    "Ollama",
+    "pexec",
+    "poptart",
+    "reqwest",
+    "scminput",
+    "sqls",
+    "sqlx",
+    "sysinfo",
+    "Tauri",
+    "vsicons",
+    "vsintellicode"
+  ],
+  "git.confirmSync": false,
+  "powershell.promptToUpdatePowerShell": false,
+  "vsicons.dontShowNewVersionMessage": true,
+  "git.openRepositoryInParentFolders": "never",
+  "git.suggestSmartCommit": false,
+  "redhat.telemetry.enabled": false,
+  "hediet.vscode-drawio.resizeImages": null,
+  "editor.formatOnSave": true,
+  "github.copilot.enable": {
+    "*": false,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+  },
+  "editor.fontFamily": "'Hack Nerd Font Mono','JetBrainsMono Nerd Font', Consolas, 'Courier New', monospace",
+  "terminal.integrated.fontFamily": "'Hack Nerd Font Mono', 'JetBrainsMono Nerd Font', Consolas, 'Courier New', monospace",
+  "rust-analyzer.check.command": "clippy",
+  "gopls": {
+    "formatting.gofumpt": true,
+    "ui.semanticTokens": true,
+    // "ui.noSemanticString": true,  // delegates string syntax highlighting to vscode
+    // "ui.noSemanticNumber": true,  // delegates number syntax highlighting to vscode
+  },
+  "go.inlayHints.assignVariableTypes": true,
+  "go.inlayHints.parameterNames": true,
+  "go.inlayHints.functionTypeParameters": true,
+  "editor.inlayHints.enabled": "offUnlessPressed",
+  "liveServer.settings.donotShowInfoMsg": true,
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
