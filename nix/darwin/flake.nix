@@ -29,15 +29,27 @@
       # Allow unfree packages.
       nixpkgs.config.allowUnfree = true;
 
+      # Environment Variables
+      environment.variables = {
+        EDITOR = "vim";
+      };
+
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages =
-        [ 
+        [
           pkgs.alacritty
+          pkgs.docker
+          pkgs.go
+          pkgs.htop
+          pkgs.jq
           pkgs.mkalias
           pkgs.neovim
           pkgs.obsidian
+          pkgs.ripgrep
           pkgs.tmux
+          pkgs.tree
+          pkgs.wget
         ];
 
       homebrew = {
@@ -57,6 +69,8 @@
           # "Yoink" = 457622435
         };
         # onActivation.cleanup = "zap";
+        onActivation.autoUpdate = true;
+        onActivation.upgrade = true;
       };
 
       fonts.packages = [
@@ -82,6 +96,25 @@
         ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
       done
           '';
+
+      system.defaults = {
+        dock.autohide = true;
+        dock.persistent-apps = [
+          "${pkgs.alacritty}/Applications/Alacritty.app"
+          "/Applications/Firefox.app"
+          "/Application/Visual Studio Code.app"
+          "${pkgs.obsidian}/Applications/Obsidian.app"
+          "/System/Applications/Mail.app"
+        ];
+        finder.FXPreferredViewStyle = "clmv";
+        loginwindow.GuestEnabled = false;
+        NSGlobalDomain.AppleICUForce24HourTime = true;
+        NSGlobalDomain.ApplePressAndHoldEnabled = false;
+        NSGlobalDomain.KeyRepeat = 2;
+      };
+
+      # Auto upgrade nix package and the daemon service
+      services.nix-daemon.enable = true;
 
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
