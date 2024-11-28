@@ -17,7 +17,7 @@ ZSH_ENV_SRC=".zshenv"
 ZSH_ENV_DEST="$HOME/.zshenv"
 
 # Config directories
-CONFIG_FOLDER_SRC=".config"
+CONFIG_FOLDER_SRC="config"
 CONFIG_FOLDER_DEST="$HOME/"
 ZSH_FOLDER_SRC=".zsh"
 ZSH_FOLDER_DEST="$HOME/"
