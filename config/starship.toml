@@ -8,8 +8,10 @@ format = """\
 
 # Drop ugly default prompt characters
 [character]
-error_symbol   = ''
-success_symbol = ''
+# error_symbol   = ''
+# success_symbol = ''
+error_symbol   = "[λ](red)"
+success_symbol = "[λ](green)"
 
 # ---
 
@@ -50,7 +52,7 @@ truncation_symbol = '…/'
 
 # Shows current git branch
 [git_branch]
-format = 'via [$symbol$branch]($style)'
+format = 'on [$symbol$branch]($style)'
 symbol = ' '
 # truncation_length = 4
 style             = 'bold green'
@@ -58,18 +60,19 @@ truncation_symbol = '…'
 
 # Shows current git status
 [git_status]
-ahead = '⇡🏎💨${count}'
-behind = '⇣😰${count}'
-conflicted = '🏳'
-deleted = '🗑'
+ahead      = '⇡🏎💨${count}'
+behind     = '⇣😰${count}'
+conflicted = '🏳 '
+deleted    = '🗑 '
 diverged   = '😵⇕⇡${ahead_count}⇣${behind_count}'
 format     = '[$all_status$ahead_behind]($style) '
-modified = '📝'
-renamed = '👅'
+modified   = "[*](yellow)"
+renamed    = '👅'
 staged     = '[++\($count\)](green)'
-stashed = '📦'
+stashed    = '📦'
 style      = 'bold green'
-untracked = '🤷'
+untracked  = "[?](red)"
+# untracked  = '🤷'
 up_to_date = '✓'
 
 [battery]
@@ -77,9 +80,9 @@ charging_symbol    = '⚡️ '
 discharging_symbol = '💀 '
 full_symbol        = '� '
 
-[battery.display]
-threshold = 10
+[[battery.display]]
 style     = 'bold red'
+threshold = 10
 
 # Shows kubernetes context and namespace
 [kubernetes]
