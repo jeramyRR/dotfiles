@@ -12,9 +12,10 @@ fastfetch
 
 # Aliases
 alias ls="eza"
-alias ll="eza -l"
-alias la="eza -la"
+alias la="eza -a"
+alias ll="eza -lag --header"
 alias cat="bat"
+alias goland="open -na /Applications/Goland.app --args $argv" 
 
 function cd -w='cd'
     builtin cd $argv || return
