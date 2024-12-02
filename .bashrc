@@ -119,5 +119,8 @@ fi
 
 [[ -f ~/.starship.rc ]] && source ~/.starship.rc
 eval "$(starship init bash)"
+
+eval "$(direnv hook bash)"
+
 . "$HOME/.asdf/asdf.sh"
 . "$HOME/.asdf/completions/asdf.bash"

@@ -1,0 +1,68 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "vim_mode": true,
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "buffer_font_family": "Hack Nerd Font Mono",
+  "hour_format": "hour24",
+  "theme": {
+    "mode": "system",
+    "light": "JetBrains New Dark",
+    "dark": "JetBrains New Dark"
+  },
+  "tab_bar": {
+    "show": true
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "lsp": {
+    "gopls": {
+      "gofumpt": true,
+      "initialization_options": {
+        "directoryFilters": ["-**/node_modules", "-**/.git"],
+        "gofumpt": true,
+        "symbolScope": "workspace",
+        "staticcheck": true,
+        "templateExtensions": ["tmpl"],
+        "experimentalPostfixCompletions": true,
+        "analyses": {
+          "nilness": true,
+          "unusedparams": true,
+          "unusedvariable": true,
+          "unusedwrite": true,
+          "useany": true
+        },
+        "codelenses": {
+          "gc_details": true
+        }
+      }
+    },
+    "tailwindcss-language-server": {
+      "settings": {
+        "classAttributes": ["class", "className", "ngClass", "styles"]
+      }
+    },
+    "yaml-language-server": {
+      "initialization_options": {
+        "yaml": {
+          "completion": false,
+          "format": {
+            "enable": false
+          }
+        }
+      }
+    }
+  },
+  "outline_panel": {
+    "dock": "right"
+  }
+}
