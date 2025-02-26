@@ -1,18 +1,44 @@
 [core]
-	excludesfile = "/home/jeramy/.config/.gitignore_global"
+    excludesfile = /home/jeramy/.gitignore
 [user]
-	name = Jeramy Singleton
-	email = jeramyRR@gmail.com
+    name = Jeramy Singleton
+    email = jeramyRR@gmail.com
 [push]
-	autoSetupRemote = true
+    autoSetupRemote = true
+    default = simple
+    followTags = true
 [init]
-	defaultBranch = main
+    defaultBranch = main
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-[credential "https://dev.azure.com"]
-    useHttpPath = true
-[credential]
-    helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+[column]
+    ui = auto
+[branch]
+    sort = -committerdate
+[tag]
+    sort = version:refname
+[diff]
+    algorithm = histogram
+    colorMoved = plain
+    mnemonicPrefix = true
+    renames = true
+[fetch]
+    prune = true
+    pruneTags = true
+    all = true
+[help]
+    autocorrect = prompt
+[commit]
+    verbose = true
+[rerere]
+    enabled = true
+    autoupdate = true
+[rebase]
+    autoSquash = true
+    autoStash = true
+    updateRefs = true
+[merge]
+    conflictstyle = zdiff3
