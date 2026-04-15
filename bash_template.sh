@@ -12,9 +12,6 @@ if ! (return 0 2> /dev/null); then
     set -o pipefail     # Use last non-zero exit code in a pipeline
 fi
 
-# Enable errtrace or the error trap handler will not work as expected
-set -o errtrace         # Ensure the error trap handler is inherited
-
 function script_usage() {
     cat << EOF
 Usage:
@@ -36,22 +33,18 @@ function parse_params() {
             -v | --verbose)
                 verbose=true
                 ;;
-            -nc | --no-colour)
-                no_colour=true
-                ;;
-            -cr | --cron)
-                cron=true
-                ;;
+            -e | --example)
+                EXAMPLE="$1"
+                shift
             *)
-                script_exit "Invalid parameter was provided: $param" 1
+                echo "Invalid parameter was provided: $param"
+                exit 1
                 ;;
         esac
     done
 }
 
 function main() {
-    trap script_trap_err ERR
-    trap script_trap_exit EXIT
     parse_params "$@"
 }
 
